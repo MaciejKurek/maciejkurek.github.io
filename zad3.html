@@ -1,49 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Kalkulator</title>
+<link rel="stylesheet" href="mystyle.css">
+<title>Kalkulator</title>
 </head>
 <body>
-    <h1>Kalkulator</h1>
-    <input type="text" id="display" readonly>
-    <br>
-	<br>
-    <button onclick="addToDisplay('1')">1</button>
-    <button onclick="addToDisplay('2')">2</button>
-    <button onclick="addToDisplay('3')">3</button>
-    <br>
-    <button onclick="addToDisplay('4')">4</button>
-    <button onclick="addToDisplay('5')">5</button>
-    <button onclick="addToDisplay('6')">6</button>
-    <br>
-    <button onclick="addToDisplay('1')">7</button>
-    <button onclick="addToDisplay('2')">8</button>
-    <button onclick="addToDisplay('3')">9</button>
-    <br>
-    <button onclick="addToDisplay('+')">+</button>
-    <button onclick="addToDisplay('-')">-</button>
-    <button onclick="clearDisplay()">C</button>
-    <br>
-	<button onclick="addToDisplay('*')">*</button>
-	<button onclick="addToDisplay('/')">/</button>
-	<button onclick="calculateResult()">=</button>
-    <script>
-        function addToDisplay(value) {
-            document.getElementById("display").value += value;
+    <div id="calculator">
+ 
+        <input type="text" id="display" disabled>
+		<br>
+ 
+        <button onclick="input('1')">1</button>
+        <button onclick="input('2')">2</button>
+        <button onclick="input('3')">3</button>
+		<br>
+        <button onclick="input('4')">4</button>
+        <button onclick="input('5')">5</button>
+        <button onclick="input('6')">6</button>
+		<br>
+        <button onclick="input('7')">7</button>
+        <button onclick="input('8')">8</button>
+        <button onclick="input('9')">9</button>
+		<br>
+		<button onclick="input('+')">+</button>
+		<button onclick="input('-')">-</button>
+        <button onclick="input('*')">*</button>
+		<br>
+		<button onclick="input('0')">0</button>
+        <button onclick="input('/')">/</button>
+		<button onclick="clearDisplay()">C</button>
+		<br>
+		<button onclick="calculate()">=</button>
+    </div>
+	<script>
+    function input(value) {
+        var display = document.getElementById('display');
+        var lastChar = display.value.slice(-1);
+ 
+        if ('+-*/'.includes(value) && '+-*/'.includes(lastChar)) {
+ 
+        } else {
+            display.value += value;
         }
-        
-        function clearDisplay() {
-            document.getElementById("display").value = "";
+    }
+ 
+    function calculate() {
+        try {
+            document.getElementById('display').value = eval(document.getElementById('display').value);
+        } catch (e) {
+            document.getElementById('display').value = 'Error';
         }
-        
-        function calculateResult() {
-            var expression = document.getElementById("display").value;
-            try {
-                var result = eval(expression);
-                document.getElementById("display").value = result;
-            } catch (error) {
-                document.getElementById("display").value = "Błąd";
-            }
-        }
-    </script>
+    }
+ 
+    function clearDisplay() {
+        document.getElementById('display').value = '';
+    }
+</script>
+ 
 </body>
+</html>
